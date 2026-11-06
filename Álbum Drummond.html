@@ -1,0 +1,777 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Álbum Drummond</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap">
+<style>
+/* Layout: álbum de família antigo. Papel envelhecido, tinta sépia, molduras de filete duplo. Retrato em moldura arqueada no topo, linha do tempo ligada ao mapa, poemas em lista + leitura, teste. */
+:root {
+  --bg: #e8dcc0; --bg2: #dccdac; --fg: #2a1d12; --mut: #6b5a43; --line: #b9a47c;
+  --oxide: #8c2f1b; --on-oxide: #f6ecd5; --steel: #4a3a28;
+  --b1: #8c2f1b; --b2: #3a2a1a; --b3: #a58d62;
+  --land: #efe3c6; --sea: #d3c39d; --ok: #3f6b3a;
+  --f-display: "IM Fell English SC", "Old Standard TT", Georgia, serif;
+  --f-text: "Old Standard TT", Georgia, "Times New Roman", serif;
+  --f-mono: "Special Elite", "Courier New", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1b140d; --bg2: #251c12; --fg: #eadcc0; --mut: #b19f7e; --line: #4a3a26;
+    --oxide: #d0694a; --on-oxide: #1b140d; --steel: #cdb98f;
+    --b1: #c85c3c; --b2: #e3d3b0; --b3: #7d6a48;
+    --land: #2a2015; --sea: #1a140c; --ok: #8fbf7f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1b140d; --bg2: #251c12; --fg: #eadcc0; --mut: #b19f7e; --line: #4a3a26;
+  --oxide: #d0694a; --on-oxide: #1b140d; --steel: #cdb98f;
+  --b1: #c85c3c; --b2: #e3d3b0; --b3: #7d6a48;
+  --land: #2a2015; --sea: #1a140c; --ok: #8fbf7f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--f-text); font-size: 18px; line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0; overflow-x: hidden;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--bg); }
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--oxide); outline-offset: 3px; }
+.wrap { max-width: 1160px; margin: 0 auto; }
+h1, h2, h3 { margin: 0; font-family: var(--f-display); text-transform: uppercase; line-height: .95; text-wrap: balance; }
+.mono { font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--mut); }
+section[id] { scroll-margin-top: 72px; }
+
+/* Header */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+  background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+}
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 22px; padding-block: 10px; }
+.mark { font-family: var(--f-display); font-weight: 400; letter-spacing: .04em; text-transform: uppercase; font-size: 20px; text-decoration: none; }
+.mark b { color: var(--oxide); }
+nav { margin-left: auto; display: flex; gap: 20px; }
+nav a { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; color: var(--mut); padding-block: 6px; }
+nav a:hover { color: var(--fg); }
+.theme { background: transparent; border: 1px solid var(--line); width: 36px; height: 36px; border-radius: 2px; display: grid; place-items: center; }
+.theme:hover { border-color: var(--oxide); }
+.theme svg { width: 18px; height: 18px; }
+@media (max-width: 760px) { nav { display: none; } .theme { margin-left: auto; } }
+
+/* Strata */
+.strata { height: 18px; background: linear-gradient(180deg, var(--b1) 0 22%, var(--b2) 22% 34%, var(--b3) 34% 52%, var(--b1) 52% 60%, var(--b2) 60% 82%, var(--b3) 82% 100%); }
+.strata.thin { height: 10px; }
+
+/* Hero */
+.hero { padding-block: 48px 56px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 48px; align-items: end; }
+.hero .eyebrow { margin-bottom: 18px; display: block; }
+.name { display: block; }
+.name .small { display: block; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 400; letter-spacing: .06em; color: var(--steel); }
+.name .big {
+  display: block; font-size: clamp(3.6rem, 14.5vw, 10.5rem); font-weight: 400; letter-spacing: -.005em; line-height: .88;
+  color: var(--oxide);
+  background: linear-gradient(180deg, var(--b1) 0 16%, var(--b2) 16% 25%, var(--b1) 25% 44%, var(--b3) 44% 52%, var(--b1) 52% 70%, var(--b2) 70% 78%, var(--b1) 78% 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.lead { font-size: 21px; max-width: 34ch; margin: 22px 0 26px; color: var(--fg); }
+.btn { display: inline-block; text-decoration: none; background: var(--oxide); color: var(--on-oxide); font-family: var(--f-mono); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; padding: 13px 20px; border: 0; border-radius: 2px; }
+.btn:hover { filter: brightness(1.1); }
+.btn.line { background: transparent; color: var(--fg); box-shadow: inset 0 0 0 1px var(--line); }
+.btn.line:hover { box-shadow: inset 0 0 0 1px var(--oxide); filter: none; }
+.ficha { border: 1px solid var(--line); background: var(--bg2); padding: 20px 22px; display: grid; gap: 14px; }
+.ficha div { display: grid; gap: 2px; }
+.ficha dt { margin: 0; }
+.ficha dd { margin: 0; font-size: 17px; line-height: 1.35; }
+.ficha dl { margin: 0; display: grid; gap: 14px; }
+@media (max-width: 860px) { .hero { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 32px 40px; } }
+
+/* Sections */
+.block { padding-block: 72px 0; }
+.block > header { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 28px; max-width: 760px; }
+.block > header h2 { font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 400; }
+.block > header p { margin: 0; color: var(--mut); }
+
+/* Timeline controls */
+.controls { border: 1px solid var(--line); background: var(--bg2); padding: 18px 20px 16px; display: grid; gap: 14px; margin-bottom: 20px; }
+.yr-row { display: flex; align-items: center; gap: 16px; }
+.yr-big { font-family: var(--f-display); font-weight: 400; font-size: 44px; line-height: 1; min-width: 4.2ch; font-variant-numeric: tabular-nums; color: var(--oxide); }
+input[type="range"] { flex: 1; min-width: 0; -webkit-appearance: none; appearance: none; height: 28px; background: transparent; margin: 0; }
+input[type="range"]::-webkit-slider-runnable-track { height: 8px; background: linear-gradient(90deg, var(--b1) 0 30%, var(--b2) 30% 36%, var(--b3) 36% 62%, var(--b1) 62% 70%, var(--b2) 70% 100%); border-radius: 1px; }
+input[type="range"]::-moz-range-track { height: 8px; background: linear-gradient(90deg, var(--b1) 0 30%, var(--b2) 30% 36%, var(--b3) 36% 62%, var(--b1) 62% 70%, var(--b2) 70% 100%); border-radius: 1px; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 28px; background: var(--fg); border: 3px solid var(--bg2); border-radius: 2px; margin-top: -10px; }
+input[type="range"]::-moz-range-thumb { width: 14px; height: 24px; background: var(--fg); border: 3px solid var(--bg2); border-radius: 2px; }
+.step-btns { display: flex; gap: 6px; }
+.sq { background: transparent; border: 1px solid var(--line); width: 38px; height: 38px; border-radius: 2px; font-size: 18px; line-height: 1; }
+.sq:hover { border-color: var(--oxide); }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+.chip { flex: none; background: transparent; border: 1px solid var(--line); padding: 5px 10px; border-radius: 2px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em; color: var(--mut); font-variant-numeric: tabular-nums; }
+.chip:hover { color: var(--fg); border-color: var(--mut); }
+.chip[aria-current="true"] { background: var(--oxide); border-color: var(--oxide); color: var(--on-oxide); }
+
+/* Map module */
+.module { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.mapbox { border: 1px solid var(--line); background: var(--sea); position: relative; min-width: 0; }
+.mapbox svg { display: block; width: 100%; height: auto; }
+.mapbox .cap { position: absolute; left: 10px; bottom: 8px; font-family: var(--f-mono); font-size: 11px; color: var(--mut); background: color-mix(in srgb, var(--bg) 80%, transparent); padding: 2px 6px; }
+.m-land { fill: var(--land); }
+.m-sea { fill: var(--sea); }
+.m-coast { fill: none; stroke: var(--b3); stroke-width: 1.5; }
+.m-grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 5; }
+.m-lbl { fill: var(--mut); font-family: var(--f-mono); font-size: 10px; }
+.m-rail { fill: none; stroke: var(--oxide); stroke-width: 2.5; stroke-dasharray: 7 5; }
+.m-town { fill: var(--mut); font-family: var(--f-mono); font-size: 10px; }
+.pin { cursor: pointer; }
+.pin .dot { fill: var(--fg); stroke: var(--land); stroke-width: 2; }
+.pin text { fill: var(--fg); font-family: var(--f-display); font-weight: 400; font-size: 17px; text-transform: uppercase; letter-spacing: .04em; paint-order: stroke; stroke: var(--land); stroke-width: 4px; }
+.pin:hover .dot, .pin.sel .dot { fill: var(--oxide); }
+.pin:focus-visible { outline: none; }
+.pin:focus-visible .dot { stroke: var(--oxide); stroke-width: 4; }
+#who { transition: transform .8s cubic-bezier(.5, 0, .2, 1); pointer-events: none; }
+#who .ring { fill: none; stroke: var(--oxide); stroke-width: 3; transform-box: fill-box; transform-origin: center; animation: ring 2.2s ease-out infinite; }
+#who .core { fill: var(--oxide); stroke: var(--land); stroke-width: 2; }
+@keyframes ring { from { transform: scale(.5); opacity: 1; } to { transform: scale(1.7); opacity: 0; } }
+
+.panel { border: 1px solid var(--line); background: var(--bg2); padding: 22px; min-width: 0; display: grid; gap: 14px; align-content: start; }
+.panel h3 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); font-weight: 400; }
+.panel p { margin: 0; }
+.where { display: inline-flex; align-items: center; gap: 8px; }
+.where::before { content: ""; width: 9px; height: 9px; background: var(--oxide); display: block; transform: rotate(45deg); }
+.around { border-top: 1px solid var(--line); padding-top: 12px; color: var(--mut); font-size: 16px; }
+.around b { font-family: var(--f-mono); font-weight: 500; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--oxide); display: block; margin-bottom: 2px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+.lnk { background: transparent; border: 1px solid var(--oxide); color: var(--oxide); padding: 5px 10px; border-radius: 2px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em; }
+.lnk:hover { background: var(--oxide); color: var(--on-oxide); }
+.placecard { border: 1px solid var(--line); border-top: 0; background: var(--bg2); padding: 16px 18px; }
+.placecard h4 { margin: 0 0 4px; font-family: var(--f-display); text-transform: uppercase; font-size: 22px; font-weight: 400; }
+.placecard p { margin: 0; font-size: 16px; color: var(--mut); }
+@media (max-width: 900px) { .module { grid-template-columns: minmax(0, 1fr); } }
+
+/* Chão */
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); }
+.fact { padding: 22px; border-right: 1px solid var(--line); min-width: 0; display: grid; gap: 8px; align-content: start; }
+.fact:last-child { border-right: 0; }
+.fact h3 { font-size: 26px; font-weight: 400; color: var(--oxide); }
+.fact p { margin: 0; font-size: 16px; }
+@media (max-width: 860px) { .facts { grid-template-columns: minmax(0, 1fr); } .fact { border-right: 0; border-bottom: 1px solid var(--line); } .fact:last-child { border-bottom: 0; } }
+.pico { margin-top: 20px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 20px; align-items: center; border: 1px solid var(--line); background: var(--bg2); padding: 20px; }
+.pico svg { width: 100%; height: auto; display: block; }
+.pico .b1 { fill: var(--b1); } .pico .b2 { fill: var(--b2); } .pico .b3 { fill: var(--b3); }
+.pico .sky { fill: var(--bg); }
+.pico .alt { stroke: var(--mut); stroke-dasharray: 4 4; stroke-width: 1; }
+.pico .tx { fill: var(--mut); font-family: var(--f-mono); font-size: 10px; }
+.toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 2px; margin-bottom: 12px; }
+.toggle button { background: transparent; border: 0; padding: 8px 14px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--mut); }
+.toggle button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.pico p { margin: 0; font-size: 16px; }
+@media (max-width: 860px) { .pico { grid-template-columns: minmax(0, 1fr); } }
+
+/* Poemas */
+.notice { border-left: 3px solid var(--oxide); padding: 4px 0 4px 14px; font-size: 16px; color: var(--mut); max-width: 70ch; margin-bottom: 22px; }
+.pfilters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.pf { background: transparent; border: 1px solid var(--line); padding: 7px 12px; border-radius: 2px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--mut); }
+.pf:hover { color: var(--fg); border-color: var(--mut); }
+.pf[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.poems { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 20px; align-items: start; }
+.plist { display: grid; border: 1px solid var(--line); min-width: 0; }
+.prow { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 12px; align-items: baseline; text-align: left; background: transparent; border: 0; border-bottom: 1px solid var(--line); padding: 14px 16px; }
+.prow:last-child { border-bottom: 0; }
+.prow:hover { background: var(--bg2); }
+.prow .y { font-family: var(--f-mono); font-size: 13px; color: var(--mut); font-variant-numeric: tabular-nums; }
+.prow .t { font-family: var(--f-display); text-transform: uppercase; font-weight: 400; font-size: 22px; line-height: 1.05; display: block; }
+.prow .bk { font-size: 15px; color: var(--mut); font-style: italic; display: block; margin-top: 2px; }
+.prow[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.prow[aria-pressed="true"] .y, .prow[aria-pressed="true"] .bk { color: color-mix(in srgb, var(--bg) 70%, var(--fg)); }
+.reading { border: 1px solid var(--line); background: var(--bg2); padding: 24px; display: grid; gap: 16px; min-width: 0; position: sticky; top: 76px; }
+.reading h3 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 400; }
+.reading p { margin: 0; }
+.reading .h { font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--oxide); display: block; margin-bottom: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--line); padding: 3px 8px; color: var(--mut); }
+@media (max-width: 900px) { .poems { grid-template-columns: minmax(0, 1fr); } .reading { position: static; } }
+
+/* Quiz */
+.quiz { border: 1px solid var(--line); background: var(--bg2); padding: 26px; max-width: 760px; display: grid; gap: 16px; }
+.quiz .q { font-size: 22px; line-height: 1.3; margin: 0; }
+.opts { display: grid; gap: 8px; }
+.opt { text-align: left; background: var(--bg); border: 1px solid var(--line); padding: 12px 14px; border-radius: 2px; font-size: 17px; }
+.opt:hover:not([disabled]) { border-color: var(--oxide); }
+.opt[disabled] { cursor: default; }
+.opt.right { border-color: var(--ok); box-shadow: inset 4px 0 0 var(--ok); }
+.opt.wrong { border-color: var(--oxide); box-shadow: inset 4px 0 0 var(--oxide); }
+.fb { margin: 0; font-size: 16px; color: var(--mut); min-height: 3.2em; }
+.qrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.score { font-family: var(--f-display); font-weight: 400; font-size: 64px; color: var(--oxide); line-height: 1; }
+
+footer { margin-top: 88px; padding-block: 28px 44px; display: grid; gap: 14px; font-size: 14px; color: var(--mut); }
+footer ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+footer a { text-decoration-color: var(--line); text-underline-offset: 3px; }
+footer a:hover { color: var(--fg); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
+/* ---- Álbum antigo ---- */
+body {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .25  0 0 0 0 .16  0 0 0 0 .08  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 5;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(70, 40, 12, .16) 100%);
+}
+h1, h2, h3, .prow .t, .placecard h4, .pin text, .mark { text-transform: none; letter-spacing: .01em; }
+h1, h2, h3 { line-height: 1.05; }
+.mark { font-size: 22px; }
+.name .small { font-size: clamp(1.4rem, 3.4vw, 2.1rem); font-weight: 400; letter-spacing: .08em; }
+.name .big { font-size: clamp(2.8rem, 9.4vw, 6.4rem); line-height: 1; letter-spacing: 0; background: none; -webkit-text-fill-color: currentColor; color: var(--oxide); }
+.block > header h2 { font-size: clamp(2rem, 5vw, 3.2rem); }
+.block > header { padding-bottom: 14px; border-bottom: 3px double var(--steel); max-width: none; }
+.block > header p { max-width: 62ch; }
+.yr-big { font-size: 40px; }
+.score { font-size: 56px; }
+.prow .t { font-size: 21px; }
+.strata, .strata.thin { height: 9px; background: none; border-top: 1px solid var(--steel); border-bottom: 3px double var(--steel); }
+.btn, .lnk, .chip, .pf, .tag, .sq, .theme, .toggle button { text-transform: none; }
+.ficha, .panel, .reading, .controls, .placecard, .quiz, .pico, .mapbox, .facts, .plist { border-color: var(--steel); box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--line); }
+.fact h3 { font-size: 24px; }
+.opt { background: var(--bg); }
+.mono { letter-spacing: .06em; text-transform: none; font-size: 13px; }
+
+.side { display: grid; gap: 26px; min-width: 0; justify-items: center; }
+.side .ficha { width: 100%; }
+.portrait { margin: 0; display: grid; gap: 12px; justify-items: center; width: 100%; }
+.frame {
+  position: relative; width: min(100%, 300px); aspect-ratio: 4 / 5; padding: 14px;
+  background: var(--bg2); border: 1px solid var(--steel);
+  border-radius: 999px 999px 3px 3px;
+  box-shadow: 0 0 0 5px var(--bg2), 0 0 0 6px var(--steel), 0 16px 30px rgba(50, 30, 10, .3);
+}
+.mat { position: relative; width: 100%; height: 100%; overflow: hidden; border: 2px solid var(--steel); border-radius: 999px 999px 2px 2px; background: var(--land); }
+.mat img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.frame.aged .mat img { filter: sepia(.85) contrast(1.08) brightness(.96) saturate(.8); }
+.mat::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  box-shadow: inset 0 0 38px rgba(60, 35, 10, .45);
+  background: radial-gradient(ellipse at 30% 20%, rgba(255, 240, 200, .14), transparent 55%);
+}
+.holder { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; text-align: center; padding: 20px; }
+.holder svg { width: 38%; opacity: .55; }
+.holder p { margin: 0; font-family: var(--f-display); font-size: 20px; }
+.holder .mono { font-size: 12px; color: var(--mut); }
+.frame.drag { outline: 3px dashed var(--oxide); outline-offset: 6px; }
+.portrait figcaption { display: grid; justify-items: center; text-align: center; margin-top: 4px; }
+.portrait figcaption b { font-family: var(--f-display); font-weight: 400; font-size: 24px; }
+.pctl { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: center; }
+.chk { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 13px; color: var(--mut); cursor: pointer; }
+.chk input { accent-color: var(--oxide); width: 16px; height: 16px; }
+.pnote { margin: 0; font-size: 13px; color: var(--mut); text-align: center; max-width: 34ch; }
+@media (max-width: 860px) { .side { justify-items: stretch; } .portrait { justify-items: center; } }
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <a class="mark" href="#topo">Drummond<b>.</b></a>
+    <nav aria-label="Seções">
+      <a href="#vida">Vida e mapa</a>
+      <a href="#chao">Chão de ferro</a>
+      <a href="#poemas">Poemas</a>
+      <a href="#teste">Teste</a>
+    </nav>
+    <button class="theme" id="theme" type="button" aria-label="Alternar tema claro e escuro">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="topo">
+  <div class="hero">
+    <div>
+      <span class="mono eyebrow">Poeta · Itabira, 1902 · Rio de Janeiro, 1987</span>
+      <h1 class="name"><span class="small">Carlos</span><span class="big">Drummond</span><span class="small">de Andrade</span></h1>
+      <p class="lead">Um guia interativo pela vida, pelos lugares e por nove poemas centrais do poeta mineiro. Mova o ano e veja Drummond atravessar o mapa, de Itabira ao Rio.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <a class="btn" href="#vida">Começar pela linha do tempo</a>
+        <a class="btn line" href="#poemas">Ir aos poemas</a>
+      </div>
+    </div>
+    <div class="side">
+    <figure class="portrait">
+      <div class="frame aged" id="frame">
+        <div class="mat">
+          <img id="pimg" alt="Retrato de Carlos Drummond de Andrade, enviado por você" hidden>
+          <div class="holder" id="pholder">
+            <svg viewBox="0 0 120 150" aria-hidden="true"><circle cx="60" cy="52" r="26" fill="var(--b3)"/><path d="M8 150c0-34 22-54 52-54s52 20 52 54z" fill="var(--b3)"/></svg>
+            <p>Aqui entra o retrato</p>
+            <button class="btn" type="button" id="pick">Escolher foto</button>
+            <span class="mono">ou arraste a imagem para cá</span>
+          </div>
+        </div>
+      </div>
+      <figcaption>
+        <b>Carlos Drummond de Andrade</b>
+        <span class="mono">1902 — 1987</span>
+      </figcaption>
+      <div class="pctl">
+        <label class="chk"><input type="checkbox" id="aged" checked> Efeito de foto antiga</label>
+        <button class="lnk" type="button" id="pclear" hidden>Remover foto</button>
+      </div>
+      <p class="pnote">A imagem fica só no seu navegador e não é enviada a lugar nenhum.</p>
+      <input type="file" id="photo" accept="image/*" hidden>
+    </figure>
+    <aside class="ficha" aria-label="Ficha resumida">
+      <dl>
+        <div><dt class="mono">Nascimento</dt><dd>31 de outubro de 1902, em Itabira do Mato Dentro (MG)</dd></div>
+        <div><dt class="mono">Morte</dt><dd>17 de agosto de 1987, no Rio de Janeiro, doze dias depois da filha, Maria Julieta</dd></div>
+        <div><dt class="mono">Estreia</dt><dd><i>Alguma Poesia</i>, 1930</dd></div>
+        <div><dt class="mono">Ofício</dt><dd>Servidor público por décadas, cronista de jornal e poeta</dd></div>
+      </dl>
+    </aside>
+    </div>
+  </div>
+  <div class="strata" aria-hidden="true"></div>
+
+  <section class="block" id="vida">
+    <header>
+      <span class="mono">Vida e mapa</span>
+      <h2>Onde ele estava em cada ano</h2>
+      <p>Arraste o controle ou escolha um ano. O ponto pulsante mostra onde Drummond vivia. Toque numa cidade do mapa para ler sobre ela.</p>
+    </header>
+
+    <div class="controls">
+      <div class="yr-row">
+        <div class="yr-big" id="yr">1902</div>
+        <input type="range" id="slider" min="1902" max="1987" step="1" value="1902" aria-label="Ano">
+        <div class="step-btns">
+          <button class="sq" type="button" id="prev" aria-label="Evento anterior">←</button>
+          <button class="sq" type="button" id="next" aria-label="Próximo evento">→</button>
+        </div>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Anos com acontecimentos"></div>
+    </div>
+
+    <div class="module">
+      <div>
+        <div class="mapbox">
+          <svg viewBox="0 0 600 500" role="img" aria-label="Mapa esquemático do sudeste do Brasil com Itabira, Belo Horizonte, Nova Friburgo, Rio de Janeiro e Vitória">
+            <rect class="m-land" x="0" y="0" width="600" height="500"/>
+            <polygon class="m-sea" points="585,0 577,20 568,125 522,190 500,227 468,264 445,324 372,397 348,448 300,453 233,455 180,460 120,460 78,482 40,500 600,500 600,0"/>
+            <polyline class="m-coast" points="577,20 568,125 522,190 500,227 468,264 445,324 372,397 348,448 300,453 233,455 180,460 120,460 78,482 40,500"/>
+            <g id="grid"></g>
+            <polyline class="m-rail" points="227,122 247,136 296,107 355,45 443,109 487,114 516,192"/>
+            <text class="m-town" x="302" y="100">Ipatinga</text>
+            <text class="m-town" x="361" y="42">Gov. Valadares</text>
+            <text class="m-town" x="436" y="98">Aimorés</text>
+            <text class="m-town" x="474" y="132">Colatina</text>
+            <text class="m-lbl" x="408" y="236" transform="rotate(34 408 236)" style="letter-spacing:.2em">OCEANO ATLÂNTICO</text>
+            <g id="pins"></g>
+            <g id="who" style="transform: translate(227px,122px)"><circle class="ring" r="14"/><circle class="core" r="6"/></g>
+            <line x1="26" y1="474" x2="116" y2="474" stroke="var(--fg)" stroke-width="2"/>
+            <text class="m-lbl" x="26" y="466">100 km</text>
+          </svg>
+          <span class="cap">Esquema aproximado · traço tracejado: Estrada de Ferro Vitória a Minas</span>
+        </div>
+        <div class="placecard" id="place" aria-live="polite"></div>
+      </div>
+
+      <article class="panel" id="panel" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <section class="block" id="chao">
+    <header>
+      <span class="mono">Geografia da obra</span>
+      <h2>Um chão de ferro</h2>
+      <p>Itabira não é só cenário. O minério que formou a cidade, a montanha que desapareceu e o trem que levava a riqueza para o mar voltam o tempo todo na memória do poeta.</p>
+    </header>
+    <div class="facts">
+      <div class="fact"><span class="mono">Onde</span><h3>Quadrilátero Ferrífero</h3><p>Itabira fica no centro de Minas Gerais, nessa região de minério, a cerca de 110 km de Belo Horizonte. Drummond viveu ali até os 13 anos.</p></div>
+      <div class="fact"><span class="mono">A montanha</span><h3>Pico do Cauê</h3><p>O nome tupi quer dizer “pedra que brilha”. Com 1.385 m, era visto da casa do poeta. A extração industrial começou em 1911, com a Itabira Iron Ore Company, e em 1942 o governo federal criou a Companhia Vale do Rio Doce.</p></div>
+      <div class="fact"><span class="mono">O caminho</span><h3>Vitória a Minas</h3><p>A estrada de ferro foi criada por decreto em 1902, ano do nascimento do poeta. Com 905 km, escoa o minério de Itabira até portos do Espírito Santo, e ainda leva passageiros entre Belo Horizonte e Vitória.</p></div>
+    </div>
+
+    <div class="pico">
+      <div>
+        <svg viewBox="0 0 400 210" role="img" aria-label="Ilustração esquemática de uma montanha em camadas, antes e depois da mineração">
+          <rect class="sky" x="0" y="0" width="400" height="210"/>
+          <defs>
+            <clipPath id="clipBefore"><path d="M0,210 L0,160 C60,150 110,120 160,78 L200,28 L240,72 C290,118 340,150 400,160 L400,210 Z"/></clipPath>
+            <clipPath id="clipAfter"><path d="M0,210 L0,160 C60,150 110,124 150,96 L170,104 L192,136 L216,148 L240,132 L262,106 L284,98 C320,122 350,150 400,160 L400,210 Z"/></clipPath>
+          </defs>
+          <g id="before" clip-path="url(#clipBefore)">
+            <rect class="b1" x="0" y="20" width="400" height="30"/><rect class="b2" x="0" y="50" width="400" height="12"/><rect class="b1" x="0" y="62" width="400" height="36"/><rect class="b3" x="0" y="98" width="400" height="14"/><rect class="b1" x="0" y="112" width="400" height="44"/><rect class="b2" x="0" y="156" width="400" height="16"/><rect class="b1" x="0" y="172" width="400" height="38"/>
+            <line class="alt" x1="0" y1="28" x2="400" y2="28"/>
+          </g>
+          <g id="after" clip-path="url(#clipAfter)" hidden>
+            <rect class="b1" x="0" y="20" width="400" height="30"/><rect class="b2" x="0" y="50" width="400" height="12"/><rect class="b1" x="0" y="62" width="400" height="36"/><rect class="b3" x="0" y="98" width="400" height="14"/><rect class="b1" x="0" y="112" width="400" height="44"/><rect class="b2" x="0" y="156" width="400" height="16"/><rect class="b1" x="0" y="172" width="400" height="38"/>
+            <line class="alt" x1="0" y1="28" x2="400" y2="28"/>
+          </g>
+          <text class="tx" x="6" y="22">altitude original do pico (1.385 m)</text>
+        </svg>
+      </div>
+      <div>
+        <div class="toggle" role="group" aria-label="Comparar o pico">
+          <button type="button" id="tg-before" aria-pressed="true">Antes</button>
+          <button type="button" id="tg-after" aria-pressed="false">Depois</button>
+        </div>
+        <p id="pico-txt"></p>
+        <p class="mono" style="margin-top:10px">Ilustração esquemática, fora de escala</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="poemas">
+    <header>
+      <span class="mono">Nove poemas centrais</span>
+      <h2>Para ler e reler</h2>
+      <p>Escolha um poema para ver o contexto, o livro em que saiu e o que observar na leitura.</p>
+    </header>
+    <p class="notice">Os versos de Drummond ainda estão protegidos por direitos autorais. Por isso este guia traz contexto e roteiro de leitura, sem reproduzir os poemas. Para lê-los, procure edições impressas ou bibliotecas.</p>
+    <div class="pfilters" id="pfilters" role="group" aria-label="Filtrar poemas por tema"></div>
+    <div class="poems">
+      <div class="plist" id="plist"></div>
+      <article class="reading" id="reading" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <section class="block" id="teste">
+    <header>
+      <span class="mono">Teste</span>
+      <h2>O que você guardou?</h2>
+      <p>Seis perguntas sobre a vida, os lugares e as obras.</p>
+    </header>
+    <div class="quiz" id="quiz"></div>
+  </section>
+
+  <div class="strata thin" style="margin-top:80px" aria-hidden="true"></div>
+  <footer>
+    <span>Guia feito a partir de consultas a fontes públicas. As datas e os fatos vieram destas páginas:</span>
+    <ul>
+      <li><a href="https://www.todamateria.com.br/carlos-drummond-de-andrade/" target="_blank" rel="noopener">Toda Matéria</a></li>
+      <li><a href="https://www.ebiografia.com/carlos_drummond/" target="_blank" rel="noopener">eBiografia</a></li>
+      <li><a href="https://www.uai.com.br/app/noticia/e-mais/2015/05/01/noticia-e-mais,167265/nos-14-anos-em-que-drummond-viveu-em-bh-a-capital-assistiu-a-uma-infl.shtml" target="_blank" rel="noopener">Estado de Minas (Drummond em BH)</a></li>
+      <li><a href="https://www.em.com.br/emfoco/2026/06/12/a-cidade-mineira-onde-uma-montanha-de-1-385-metros-desapareceu-e-nasceu-o-maior-poeta-do-brasil/" target="_blank" rel="noopener">Estado de Minas (Itabira)</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Vit%C3%B3ria-Minas_Railway" target="_blank" rel="noopener">Estrada de Ferro Vitória a Minas</a></li>
+      <li><a href="https://www.culturagenial.com/poema-no-meio-do-caminho-de-carlos-drummond-de-andrade/" target="_blank" rel="noopener">Cultura Genial (No meio do caminho)</a></li>
+      <li><a href="https://www.culturagenial.com/livro-sentimento-do-mundo-de-carlos-drummond-de-andrade/" target="_blank" rel="noopener">Cultura Genial (Sentimento do Mundo)</a></li>
+      <li><a href="https://www.culturagenial.com/poema-a-maquina-do-mundo-de-carlos-drummond-de-andrade/" target="_blank" rel="noopener">Cultura Genial (A Máquina do Mundo)</a></li>
+      <li><a href="https://riomemorias.com.br/statue-of-carlos-drummond-de-andrade/" target="_blank" rel="noopener">Rio Memórias</a></li>
+    </ul>
+    <span>O mapa é um esquema aproximado e não serve para navegação.</span>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+
+  /* ---------- Dados ---------- */
+  var X = function (lon) { return Math.round((lon + 45.5) * 100); };
+  var Y = function (lat) { return Math.round((Math.abs(lat) - 18.4) * 100); };
+
+  var PLACES = {
+    itabira: { name: "Itabira", x: 227, y: 122, lx: 14, ly: -12, a: "start",
+      text: "Cidade natal, a cerca de 110 km de Belo Horizonte. Foi onde ele viveu até os 13 anos, entre fazendas, a vista do Pico do Cauê e o movimento do minério. Aparece em “Confidência do Itabirano” e em “A Montanha Pulverizada”." },
+    bh: { name: "Belo Horizonte", x: 156, y: 152, lx: -12, ly: 24, a: "end",
+      text: "Capital planejada de Minas, inaugurada em 1897. Drummond viveu ali de 1920 a 1934, estudou farmácia, escreveu em jornais e fundou A Revista. Encontrava os amigos escritores na Livraria Alves, no Bar do Ponto e no Café Estrela." },
+    friburgo: { name: "Nova Friburgo", x: 297, y: 388, lx: 14, ly: 6, a: "start",
+      text: "Cidade serrana do Rio de Janeiro, sede do internato jesuíta Colégio Anchieta, onde Drummond estudou em 1918 e 1919. Foi expulso por “insubordinação mental”, depois de discutir com o professor de Português." },
+    rio: { name: "Rio de Janeiro", x: 233, y: 451, lx: -14, ly: -10, a: "end",
+      text: "Capital federal até 1960. Drummond chegou em 1934, morou em Copacabana (Rua Joaquim Nabuco, 81, até 1962) e morreu ali em 1987. Desde 2002 há uma estátua dele sentada num banco da Avenida Atlântica." },
+    vitoria: { name: "Vitória", x: 516, y: 192, lx: -12, ly: 24, a: "end",
+      text: "Capital do Espírito Santo e ponto final da Estrada de Ferro Vitória a Minas, que desde o início do século XX leva o minério de Itabira até o porto. Drummond não morou aqui, mas o ferro da terra dele passou por esta linha." }
+  };
+
+  var EVENTS = [
+    { y: 1902, place: "itabira", t: "Nasce em Itabira", p: "No dia 31 de outubro nasce Carlos, o nono filho de uma família de fazendeiros. Itabira do Mato Dentro é uma cidade pequena, cercada de montanhas de ferro.", c: "Primeira República. Em fevereiro, um decreto cria a Estrada de Ferro Vitória a Minas." },
+    { y: 1911, place: "itabira", t: "A mineração industrial chega", p: "A Itabira Iron Ore Company recebe a concessão para explorar o minério. Começa a transformação do Pico do Cauê, que o menino via da janela de casa.", c: "O ferro de Itabira passa a seguir de trem para os portos do Espírito Santo." },
+    { y: 1916, place: "bh", t: "Deixa Itabira", p: "Aos 13 anos ele vai estudar num colégio em Belo Horizonte, a capital planejada de Minas.", c: "Belo Horizonte tem menos de 20 anos de existência." },
+    { y: 1918, place: "friburgo", t: "Internato em Nova Friburgo", p: "Estuda no Colégio Anchieta, dos jesuítas, e ganha prêmios em concursos literários.", c: "O Brasil vive o fim da Primeira Guerra Mundial." },
+    { y: 1919, place: "friburgo", t: "Expulso do colégio", p: "Sai do Anchieta por “insubordinação mental”, depois de uma discussão com o professor de Português.", c: "" },
+    { y: 1920, place: "bh", t: "Vive em Belo Horizonte", p: "Começa a fase mineira na capital, onde ficará até 1934. Escreve em jornais, usa pseudônimos e forma um círculo de amigos escritores.", c: "Cafés, livrarias e jornais formam o ambiente literário da nova capital." },
+    { y: 1923, place: "bh", t: "Cursa farmácia", p: "Entra na Escola de Odontologia e Farmácia. Vai se formar em 1925, mas nunca exercerá a profissão.", c: "" },
+    { y: 1924, place: "bh", t: "Conhece os modernistas", p: "Mário de Andrade, Oswald de Andrade e Tarsila do Amaral visitam Belo Horizonte, e Drummond começa uma amizade com Mário que dura até 1945.", c: "Dois anos depois da Semana de Arte Moderna de 1922, em São Paulo." },
+    { y: 1925, place: "bh", t: "A Revista e o casamento", p: "Funda a revista modernista A Revista com Martins de Almeida, Emílio Moura e Gregoriano Canedo, que sai em três números. Casa-se com Dolores Dutra de Morais e se forma em farmácia.", c: "" },
+    { y: 1927, place: "bh", t: "Morre o primeiro filho", p: "Nasce Carlos Flávio, que vive apenas meia hora. Alguns críticos ligam essa perda a “No meio do caminho”.", c: "", poems: ["meio"] },
+    { y: 1928, place: "bh", t: "O poema do escândalo", p: "“No meio do caminho” sai no número 3 da Revista de Antropofagia, em São Paulo, e provoca uma polêmica enorme. Nasce a filha Maria Julieta.", c: "A Antropofagia, de Oswald de Andrade, é o centro do modernismo mais radical.", poems: ["meio"] },
+    { y: 1930, place: "bh", t: "Alguma Poesia", p: "Publica o primeiro livro, que abre com o “Poema de Sete Faces” e traz “No meio do caminho” e “Cidadezinha Qualquer”.", c: "Ano da Revolução de 1930, que leva Getúlio Vargas ao poder.", poems: ["sete", "meio", "cidadezinha"] },
+    { y: 1934, place: "rio", t: "Muda-se para o Rio", p: "Vai trabalhar como chefe de gabinete do ministro Gustavo Capanema, no Ministério da Educação e Saúde, e se fixa em Copacabana. Sai também Brejo das Almas.", c: "O Rio é a capital federal e o centro político e cultural do país." },
+    { y: 1940, place: "rio", t: "Sentimento do Mundo", p: "Livro escrito entre 1935 e 1940, na sombra da guerra e do fascismo, em que a poesia se volta para o presente e para os outros.", c: "Estado Novo no Brasil. A Segunda Guerra Mundial já havia começado na Europa.", poems: ["confidencia", "maosdadas"] },
+    { y: 1942, place: "rio", t: "José", p: "Sai o livro José, com o poema que dá nome a ele.", c: "Getúlio Vargas nacionaliza as minas e cria a Companhia Vale do Rio Doce, a atual Vale.", poems: ["jose"] },
+    { y: 1945, place: "rio", t: "A Rosa do Povo", p: "Publica o livro mais engajado da fase de guerra, com “A Flor e a Náusea”. Deixa o gabinete de Capanema e passa ao Serviço do Patrimônio Histórico e Artístico Nacional, onde ficará até 1962.", c: "Fim da Segunda Guerra e do Estado Novo. Morre Mário de Andrade.", poems: ["flor"] },
+    { y: 1951, place: "rio", t: "Claro Enigma", p: "O livro volta a formas clássicas e inclui “A Máquina do Mundo”, em diálogo com Camões.", c: "", poems: ["maquina"] },
+    { y: 1960, place: "rio", t: "A capital muda", p: "O Rio deixa de ser a capital federal com a inauguração de Brasília, mas Drummond continua morando em Copacabana.", c: "Brasília é inaugurada em 21 de abril." },
+    { y: 1962, place: "rio", t: "Aposenta-se", p: "Deixa o serviço público depois de décadas e mantém a vida de escritor e cronista nos jornais do Rio. No mesmo ano sai Lição de Coisas.", c: "" },
+    { y: 1973, place: "rio", t: "A Montanha Pulverizada", p: "Escreve sobre o fim do Pico do Cauê, que viu inteiro na infância e encontrou depois reduzido a uma cratera.", c: "A mineração já havia transformado a paisagem de Itabira.", poems: ["montanha"] },
+    { y: 1982, place: "rio", t: "Doutor honoris causa", p: "Aos 80 anos recebe o título de Doutor Honoris Causa da Universidade Federal do Rio Grande do Norte.", c: "" },
+    { y: 1987, place: "rio", t: "Despede-se no Rio", p: "A filha, Maria Julieta, morre em 5 de agosto. Doze dias depois, em 17 de agosto, morre Carlos Drummond de Andrade.", c: "Quinze anos depois, em 2002, uma estátua dele é inaugurada em Copacabana." }
+  ];
+
+  var POEMS = [
+    { id: "sete", t: "Poema de Sete Faces", y: 1930, book: "Alguma Poesia, 1930", tags: ["Eu e a cidade"], year: 1930, place: "bh",
+      ctx: "Abre o primeiro livro de Drummond e funciona como apresentação do poeta. O texto tem sete estrofes, e cada uma mostra uma face do mesmo sujeito.",
+      look: "Repare em como o eu do poema se apresenta pelo desajuste diante da vida, que a crítica resume na palavra “gauche”, e em como o corpo, o desejo e a cidade aparecem lado a lado." },
+    { id: "meio", t: "No meio do caminho", y: 1928, book: "Revista de Antropofagia (jul. 1928) e Alguma Poesia, 1930", tags: ["Reflexão"], year: 1928, place: null,
+      ctx: "Saiu no número 3 da Revista de Antropofagia, dirigida por Oswald de Andrade. A crítica da época o recebeu com hostilidade, sobretudo pela simplicidade e pela repetição. Com o tempo virou um emblema da obra de Drummond.",
+      look: "Observe o jogo de repetições e a ausência de rima e de métrica fixa. Há várias leituras: a pedra como obstáculo da vida, como marca de um fato que não se esquece (alguns a ligam à perda do filho em 1927) e como provocação contra o gosto parnasiano." },
+    { id: "cidadezinha", t: "Cidadezinha Qualquer", y: 1930, book: "Alguma Poesia, 1930", tags: ["Minas e memória"], year: 1930, place: "itabira",
+      ctx: "Retrato curto de uma cidade pequena do interior, onde o tempo parece não andar.",
+      look: "Veja como poucas imagens do cotidiano bastam para sugerir lentidão e rotina. Muitos leitores associam o cenário às cidades do interior de Minas, como a Itabira da infância do poeta." },
+    { id: "confidencia", t: "Confidência do Itabirano", y: 1940, book: "Sentimento do Mundo, 1940", tags: ["Minas e memória"], year: 1940, place: "itabira",
+      ctx: "O poeta compara o que ele é ao que Itabira é feita: ferro. O poema mistura orgulho e tristeza pela terra natal, e o minério vira metáfora de identidade.",
+      look: "Siga a imagem do ferro. Ela aparece como matéria da cidade, da memória e do próprio eu, e liga a geografia de Itabira à biografia do poeta." },
+    { id: "maosdadas", t: "Mãos Dadas", y: 1940, book: "Sentimento do Mundo, 1940", tags: ["Mundo em guerra"], year: 1940, place: null,
+      ctx: "O livro foi escrito entre 1935 e 1940, com o fascismo em alta e a Guerra Civil Espanhola no horizonte. O poema recusa uma poesia de fuga e defende cantar o presente e a vida dos companheiros.",
+      look: "Note como o poema troca o refúgio na fantasia pelo compromisso com o presente. É uma virada em relação ao humor e ao niilismo de Brejo das Almas." },
+    { id: "jose", t: "José", y: 1942, book: "José, 1942", tags: ["Eu e a cidade", "Reflexão"], year: 1942, place: null,
+      ctx: "Poema que dá nome ao livro de 1942. Um homem comum, sem nada de herói, enfrenta o vazio depois que as saídas conhecidas acabam.",
+      look: "O texto avança por perguntas que ficam sem resposta, e o ritmo repetitivo reforça a sensação de impasse. Muitos leitores veem aqui o retrato do indivíduo comum em tempo de crise." },
+    { id: "flor", t: "A Flor e a Náusea", y: 1945, book: "A Rosa do Povo, 1945", tags: ["Mundo em guerra", "Eu e a cidade"], year: 1945, place: "rio",
+      ctx: "Escrito num tempo de guerra e de autoritarismo, o poema acompanha um eu que atravessa uma cidade doente e encontra, no asfalto, uma flor.",
+      look: "Observe o contraste entre o enjoo diante do mundo e a esperança mínima da flor, que não resolve nada e mesmo assim existe." },
+    { id: "maquina", t: "A Máquina do Mundo", y: 1951, book: "Claro Enigma, 1951", tags: ["Reflexão", "Minas e memória"], year: 1951, place: null,
+      ctx: "Escrito em tercetos de versos decassílabos, como Os Lusíadas, o poema começa numa estrada de Minas Gerais, ao entardecer, onde um eu cansado recebe uma revelação repentina.",
+      look: "Compare com o canto X de Camões. Lá, o herói recebe o conhecimento do universo. Aqui, o eu abaixa os olhos, recusa a revelação e segue pelo caminho." },
+    { id: "montanha", t: "A Montanha Pulverizada", y: 1973, book: "Poema de 1973", tags: ["Minas e memória"], year: 1973, place: "itabira",
+      ctx: "Poema sobre o fim do Pico do Cauê, a montanha que Drummond via da janela na infância e que a mineração transformou numa cratera.",
+      look: "Leia junto com “Confidência do Itabirano”: o ferro que formava a identidade do poeta vira também a força que apaga a paisagem." }
+  ];
+  var FILTERS = ["Todos", "Minas e memória", "Eu e a cidade", "Mundo em guerra", "Reflexão"];
+
+  var QUIZ = [
+    { q: "Em que cidade nasceu Carlos Drummond de Andrade?", o: ["Belo Horizonte", "Itabira do Mato Dentro", "Nova Friburgo", "Ouro Preto"], a: 1, e: "Ele nasceu em Itabira do Mato Dentro, em 31 de outubro de 1902." },
+    { q: "Em que revista saiu “No meio do caminho”, em 1928?", o: ["A Revista", "Revista de Antropofagia", "Klaxon", "Diário de Minas"], a: 1, e: "Saiu no número 3 da Revista de Antropofagia, dirigida por Oswald de Andrade, e causou polêmica." },
+    { q: "O que aconteceu com o Pico do Cauê, que o poeta via da janela de casa?", o: ["Foi tombado como monumento", "Virou parque nacional", "Foi transformado em cratera pela mineração", "Ficou coberto por uma represa"], a: 2, e: "A extração de ferro reduziu a montanha a uma cratera. O poeta escreveu “A Montanha Pulverizada” sobre isso." },
+    { q: "Que cargo Drummond ocupou no Ministério da Educação e Saúde, de 1934 a 1945?", o: ["Ministro", "Chefe de gabinete", "Diretor de museu", "Embaixador cultural"], a: 1, e: "Ele foi chefe de gabinete de Gustavo Capanema e se mudou para o Rio por causa do convite." },
+    { q: "Qual livro de 1951 retoma formas clássicas e traz “A Máquina do Mundo”?", o: ["Sentimento do Mundo", "A Rosa do Povo", "Claro Enigma", "Alguma Poesia"], a: 2, e: "Claro Enigma, de 1951, dialoga com a tradição clássica, em especial com Camões." },
+    { q: "Que ferrovia leva o minério de Itabira até o litoral capixaba?", o: ["Estrada de Ferro Central do Brasil", "Estrada de Ferro Vitória a Minas", "Estrada de Ferro Madeira-Mamoré", "Estrada de Ferro Leopoldina"], a: 1, e: "A Vitória a Minas liga Minas Gerais ao porto de Vitória e tem 905 km." }
+  ];
+
+  /* ---------- Mapa ---------- */
+  (function drawMap() {
+    var g = "";
+    for (var lon = -45; lon <= -40; lon++) { var x = X(lon); g += '<line class="m-grid" x1="' + x + '" y1="0" x2="' + x + '" y2="500"/><text class="m-lbl" x="' + (x + 3) + '" y="12">' + Math.abs(lon) + '°O</text>'; }
+    for (var lat = -19; lat >= -23; lat--) { var y = Y(lat); g += '<line class="m-grid" x1="0" y1="' + y + '" x2="600" y2="' + y + '"/><text class="m-lbl" x="4" y="' + (y - 3) + '">' + Math.abs(lat) + '°S</text>'; }
+    $("#grid").innerHTML = g;
+    var p = "";
+    Object.keys(PLACES).forEach(function (k) {
+      var c = PLACES[k];
+      p += '<g class="pin" data-place="' + k + '" tabindex="0" role="button" aria-label="' + c.name + '">' +
+        '<circle r="20" fill="transparent"/><circle class="dot" cx="' + c.x + '" cy="' + c.y + '" r="7"/>' +
+        '<text x="' + (c.x + c.lx) + '" y="' + (c.y + c.ly) + '" text-anchor="' + c.a + '">' + c.name + '</text></g>';
+    });
+    $("#pins").innerHTML = p;
+    // move o círculo transparente de toque para a posição certa
+    Array.prototype.forEach.call(document.querySelectorAll(".pin"), function (el) {
+      var c = PLACES[el.getAttribute("data-place")];
+      var hit = el.querySelector("circle");
+      hit.setAttribute("cx", c.x); hit.setAttribute("cy", c.y);
+    });
+  })();
+
+  /* ---------- Linha do tempo ---------- */
+  var year = 1902, placeKey = "itabira";
+  function locationFor(y) {
+    if (y < 1916) return "itabira";
+    if (y < 1918) return "bh";
+    if (y < 1920) return "friburgo";
+    if (y < 1934) return "bh";
+    return "rio";
+  }
+  function eventFor(y) {
+    var e = EVENTS[0];
+    for (var i = 0; i < EVENTS.length; i++) { if (EVENTS[i].y <= y) e = EVENTS[i]; }
+    return e;
+  }
+  function renderPlace(k) {
+    var c = PLACES[k];
+    $("#place").innerHTML = "<h4>" + c.name + "</h4><p>" + c.text + "</p>";
+    Array.prototype.forEach.call(document.querySelectorAll(".pin"), function (el) { el.classList.toggle("sel", el.getAttribute("data-place") === k); });
+  }
+  function renderChips() {
+    $("#chips").innerHTML = EVENTS.map(function (e) { return '<button class="chip" type="button" data-year="' + e.y + '">' + e.y + "</button>"; }).join("");
+  }
+  function setYear(y, scrollToChip) {
+    year = Math.max(1902, Math.min(1987, y));
+    var e = eventFor(year);
+    $("#yr").textContent = year;
+    $("#slider").value = year;
+    var loc = locationFor(year);
+    var c = PLACES[loc];
+    $("#who").style.transform = "translate(" + c.x + "px," + c.y + "px)";
+    placeKey = loc;
+    renderPlace(loc);
+    var links = (e.poems || []).map(function (id) {
+      var pm = POEMS.filter(function (x) { return x.id === id; })[0];
+      return '<button class="lnk" type="button" data-poem="' + id + '">Ler sobre “' + pm.t + '”</button>';
+    }).join("");
+    $("#panel").innerHTML =
+      '<span class="mono where">' + e.y + " · " + PLACES[e.place].name + "</span>" +
+      "<h3>" + e.t + "</h3><p>" + e.p + "</p>" +
+      (e.c ? '<div class="around"><b>Ao redor</b>' + e.c + "</div>" : "") +
+      (links ? '<div class="links">' + links + "</div>" : "");
+    Array.prototype.forEach.call(document.querySelectorAll(".chip"), function (b) {
+      var on = +b.getAttribute("data-year") === e.y;
+      if (on) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current");
+      if (on && scrollToChip) b.scrollIntoView({ block: "nearest", inline: "center" });
+    });
+  }
+  function stepEvent(dir) {
+    var e = eventFor(year), i = EVENTS.indexOf(e);
+    if (dir > 0 && year >= 1987) return;
+    var next = EVENTS[Math.max(0, Math.min(EVENTS.length - 1, i + dir))];
+    if (dir < 0 && year > e.y) next = e;
+    setYear(next.y, true);
+  }
+  $("#slider").addEventListener("input", function (ev) { setYear(+ev.target.value, true); });
+  $("#prev").addEventListener("click", function () { stepEvent(-1); });
+  $("#next").addEventListener("click", function () { stepEvent(1); });
+
+  /* ---------- Pico ---------- */
+  var PICO = {
+    before: "Antes da mineração, o Pico do Cauê era uma montanha de ferro em camadas, que brilhava ao sol e orientava viajantes desde o período colonial. Foi essa a montanha que o menino via da janela.",
+    after: "Depois de décadas de extração, o pico virou uma cratera. Quando voltou à cidade, Drummond encontrou um vazio no lugar da montanha, e escreveu sobre isso em 1973."
+  };
+  function setPico(which) {
+    $("#before").hidden = which !== "before";
+    $("#after").hidden = which !== "after";
+    $("#tg-before").setAttribute("aria-pressed", which === "before");
+    $("#tg-after").setAttribute("aria-pressed", which === "after");
+    $("#pico-txt").textContent = PICO[which];
+  }
+  $("#tg-before").addEventListener("click", function () { setPico("before"); });
+  $("#tg-after").addEventListener("click", function () { setPico("after"); });
+
+  /* ---------- Poemas ---------- */
+  var filter = "Todos", current = "confidencia";
+  function renderFilters() {
+    $("#pfilters").innerHTML = FILTERS.map(function (f) { return '<button class="pf" type="button" data-filter="' + f + '" aria-pressed="' + (f === filter) + '">' + f + "</button>"; }).join("");
+  }
+  function visible() { return POEMS.filter(function (p) { return filter === "Todos" || p.tags.indexOf(filter) > -1; }); }
+  function renderList() {
+    var list = visible();
+    if (!list.some(function (p) { return p.id === current; })) current = list[0].id;
+    $("#plist").innerHTML = list.map(function (p) {
+      return '<button class="prow" type="button" data-poem="' + p.id + '" aria-pressed="' + (p.id === current) + '"><span class="y">' + p.y + '</span><span><span class="t">' + p.t + '</span><span class="bk">' + p.book + "</span></span></button>";
+    }).join("");
+    renderReading();
+  }
+  function renderReading() {
+    var p = POEMS.filter(function (x) { return x.id === current; })[0];
+    $("#reading").innerHTML =
+      '<span class="mono">' + p.book + "</span><h3>" + p.t + "</h3>" +
+      '<div class="tags">' + p.tags.map(function (t) { return '<span class="tag">' + t + "</span>"; }).join("") + "</div>" +
+      '<p><span class="h">Contexto</span>' + p.ctx + "</p>" +
+      '<p><span class="h">O que observar</span>' + p.look + "</p>" +
+      '<div class="links"><button class="lnk" type="button" data-goyear="' + p.year + '">Ver ' + p.year + " na linha do tempo</button>" +
+      (p.place ? '<button class="lnk" type="button" data-goplace="' + p.place + '">Ver ' + PLACES[p.place].name + " no mapa</button>" : "") + "</div>";
+  }
+  function selectPoem(id, scroll) {
+    var p = POEMS.filter(function (x) { return x.id === id; })[0];
+    if (filter !== "Todos" && p.tags.indexOf(filter) < 0) { filter = "Todos"; renderFilters(); }
+    current = id; renderList();
+    if (scroll) $("#poemas").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  /* ---------- Quiz ---------- */
+  var qi = 0, score = 0, answered = false;
+  function renderQuiz() {
+    var box = $("#quiz");
+    if (qi >= QUIZ.length) {
+      box.innerHTML = '<span class="mono">Resultado</span><div class="score">' + score + " / " + QUIZ.length + "</div><p class=\"fb\">" +
+        (score >= 5 ? "Você leu bem o poeta e o chão dele." : score >= 3 ? "Bom começo. Volte à linha do tempo e aos poemas para fechar as lacunas." : "Percorra o mapa e os poemas e tente de novo.") +
+        '</p><div><button class="btn" type="button" data-quiz="restart">Refazer o teste</button></div>';
+      return;
+    }
+    var q = QUIZ[qi];
+    box.innerHTML = '<div class="qrow"><span class="mono">Pergunta ' + (qi + 1) + " de " + QUIZ.length + '</span><span class="mono">Acertos: ' + score + '</span></div><p class="q">' + q.q + '</p><div class="opts">' +
+      q.o.map(function (o, i) { return '<button class="opt" type="button" data-opt="' + i + '">' + o + "</button>"; }).join("") +
+      '</div><p class="fb" id="fb" aria-live="polite"></p><div><button class="btn" type="button" data-quiz="next" hidden id="qnext">' + (qi === QUIZ.length - 1 ? "Ver resultado" : "Próxima") + "</button></div>";
+    answered = false;
+  }
+  function answer(i) {
+    if (answered) return;
+    answered = true;
+    var q = QUIZ[qi];
+    if (i === q.a) score++;
+    Array.prototype.forEach.call(document.querySelectorAll(".opt"), function (b, k) {
+      b.disabled = true;
+      if (k === q.a) b.classList.add("right");
+      else if (k === i) b.classList.add("wrong");
+    });
+    $("#fb").textContent = (i === q.a ? "Certo. " : "Não foi dessa vez. ") + q.e;
+    $("#qnext").hidden = false;
+  }
+
+  /* ---------- Eventos ---------- */
+  document.addEventListener("click", function (e) {
+    var t = e.target, el;
+    if ((el = t.closest(".pin"))) { var k = el.getAttribute("data-place"); renderPlace(k); return; }
+    if ((el = t.closest("[data-year]"))) { return setYear(+el.getAttribute("data-year"), false); }
+    if ((el = t.closest("[data-filter]"))) { filter = el.getAttribute("data-filter"); renderFilters(); return renderList(); }
+    if ((el = t.closest(".prow"))) { current = el.getAttribute("data-poem"); return renderList(); }
+    if ((el = t.closest(".links [data-poem]"))) { return selectPoem(el.getAttribute("data-poem"), true); }
+    if ((el = t.closest("[data-goyear]"))) { setYear(+el.getAttribute("data-goyear"), true); return $("#vida").scrollIntoView({ behavior: "smooth", block: "start" }); }
+    if ((el = t.closest("[data-goplace]"))) { renderPlace(el.getAttribute("data-goplace")); return $("#vida").scrollIntoView({ behavior: "smooth", block: "start" }); }
+    if ((el = t.closest("[data-opt]"))) { return answer(+el.getAttribute("data-opt")); }
+    if ((el = t.closest("[data-quiz]"))) {
+      if (el.getAttribute("data-quiz") === "restart") { qi = 0; score = 0; } else { qi++; }
+      return renderQuiz();
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("pin")) {
+      e.preventDefault(); renderPlace(e.target.getAttribute("data-place"));
+    }
+  });
+  $("#theme").addEventListener("click", function () {
+    var cur = document.documentElement.getAttribute("data-theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+  });
+
+
+  /* ---------- Retrato ---------- */
+  var PKEY = "album-drummond-foto";
+  function setPhoto(src) {
+    var img = $("#pimg");
+    if (src) { img.src = src; img.hidden = false; $("#pholder").hidden = true; $("#pclear").hidden = false; }
+    else { img.removeAttribute("src"); img.hidden = true; $("#pholder").hidden = false; $("#pclear").hidden = true; }
+  }
+  function loadFile(f) {
+    if (!f || !/^image\//.test(f.type)) return;
+    var r = new FileReader();
+    r.onload = function () {
+      var im = new Image();
+      im.onload = function () {
+        var max = 900, k = Math.min(1, max / Math.max(im.width, im.height));
+        var c = document.createElement("canvas"); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+        c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+        var out = c.toDataURL("image/jpeg", 0.88);
+        setPhoto(out);
+        try { localStorage.setItem(PKEY, out); } catch (e) {}
+      };
+      im.src = r.result;
+    };
+    r.readAsDataURL(f);
+  }
+  $("#pick").addEventListener("click", function () { $("#photo").click(); });
+  $("#photo").addEventListener("change", function (e) { loadFile(e.target.files[0]); e.target.value = ""; });
+  $("#pclear").addEventListener("click", function () { setPhoto(null); try { localStorage.removeItem(PKEY); } catch (e) {} });
+  $("#aged").addEventListener("change", function (e) { $("#frame").classList.toggle("aged", e.target.checked); });
+  var fr = $("#frame");
+  ["dragenter", "dragover"].forEach(function (n) { fr.addEventListener(n, function (e) { e.preventDefault(); fr.classList.add("drag"); }); });
+  ["dragleave", "drop"].forEach(function (n) { fr.addEventListener(n, function (e) { e.preventDefault(); fr.classList.remove("drag"); }); });
+  fr.addEventListener("drop", function (e) { loadFile(e.dataTransfer.files[0]); });
+  try { var saved = localStorage.getItem(PKEY); if (saved) setPhoto(saved); } catch (e) {}
+
+  /* ---------- Início ---------- */
+  renderChips(); renderFilters(); renderList(); renderQuiz(); setPico("before"); setYear(1902, false);
+})();
+</script>
+
+</body></html>
